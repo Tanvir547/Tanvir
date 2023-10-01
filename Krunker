@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Shooting Game</title>
+    <style>
+        #game-container {
+            width: 400px;
+            height: 400px;
+            border: 1px solid #000;
+            position: relative;
+        }
+        #player {
+            width: 20px;
+            height: 20px;
+            background-color: blue;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <h1>Simple Shooting Game</h1>
+    <div id="game-container">
+        <div id="player"></div>
+    </div>
+
+    <script>
+        const player = document.getElementById('player');
+        const gameContainer = document.getElementById('game-container');
+
+        player.style.left = '50px';
+        player.style.top = '50px';
+
+        document.addEventListener('keydown', movePlayer);
+
+        function movePlayer(event) {
+            const stepSize = 10;
+            const playerPosition = player.getBoundingClientRect();
+            const gamePosition = gameContainer.getBoundingClientRect();
+
+            switch (event.key) {
+                case 'ArrowUp':
+                    if (playerPosition.top - stepSize >= gamePosition.top) {
+                        player.style.top = (playerPosition.top - stepSize) + 'px';
+                    }
+                    break;
+                case 'ArrowDown':
+                    if (playerPosition.bottom + stepSize <= gamePosition.bottom) {
+                        player.style.top = (playerPosition.top + stepSize) + 'px';
+                    }
+                    break;
+                case 'ArrowLeft':
+                    if (playerPosition.left - stepSize >= gamePosition.left) {
+                        player.style.left = (playerPosition.left - stepSize) + 'px';
+                    }
+                    break;
+                case 'ArrowRight':
+                    if (playerPosition.right + stepSize <= gamePosition.right) {
+                        player.style.left = (playerPosition.left + stepSize) + 'px';
+                    }
+                    break;
+            }
+        }
+    </script>
+</body>
+</html>
